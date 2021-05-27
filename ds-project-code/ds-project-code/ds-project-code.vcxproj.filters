@@ -23,4 +23,20 @@
       <UniqueIdentifier>{68c4adf9-80e1-4118-917e-ccc3b48fbd34}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\rovers\rover.cpp">
+      <Filter>rovers</Filter>
+    </ClCompile>
+    <ClCompile Include="mission.cpp">
+      <Filter>missions</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\rovers\rover.h">
+      <Filter>rovers</Filter>
+    </ClInclude>
+    <ClInclude Include="mission.h">
+      <Filter>missions</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
