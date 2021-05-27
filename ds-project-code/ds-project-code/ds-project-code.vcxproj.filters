@@ -27,7 +27,7 @@
     <ClCompile Include="..\rovers\rover.cpp">
       <Filter>rovers</Filter>
     </ClCompile>
-    <ClCompile Include="mission.cpp">
+    <ClCompile Include="..\missions\mission.cpp">
       <Filter>missions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +35,10 @@
     <ClInclude Include="..\rovers\rover.h">
       <Filter>rovers</Filter>
     </ClInclude>
-    <ClInclude Include="mission.h">
+    <ClInclude Include="..\data structures\LinkedList.h">
+      <Filter>data structures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\missions\mission.h">
       <Filter>missions</Filter>
     </ClInclude>
   </ItemGroup>

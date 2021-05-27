@@ -19,12 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\missions\mission.cpp" />
     <ClCompile Include="..\rovers\rover.cpp" />
-    <ClCompile Include="mission.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\data structures\LinkedList.h" />
+    <ClInclude Include="..\missions\mission.h" />
     <ClInclude Include="..\rovers\rover.h" />
-    <ClInclude Include="mission.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
