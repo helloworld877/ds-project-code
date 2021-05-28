@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\data structures\Priority_Queue.cpp" />
     <ClCompile Include="..\missions\mission.cpp" />
     <ClCompile Include="..\rovers\rover.cpp" />
     <ClCompile Include="..\Source.cpp" />
@@ -27,6 +26,7 @@
   <ItemGroup>
     <ClInclude Include="..\data structures\LinkedList.h" />
     <ClInclude Include="..\data structures\Priority_Queue.h" />
+    <ClInclude Include="..\data structures\Queue.h" />
     <ClInclude Include="..\missions\mission.h" />
     <ClInclude Include="..\rovers\rover.h" />
   </ItemGroup>

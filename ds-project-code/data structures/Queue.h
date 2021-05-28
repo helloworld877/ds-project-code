@@ -43,9 +43,36 @@ private:
 	QNode<T>* front;
 	QNode<T>* rear;
 public:
-	Queue();
+	Queue()
+	{
+		front = rear = nullptr;
+	}
 	
-	void enqueue(T data);
-	void dequeue();
+	void enqueue(T& data)
+	{
+		{
+			QNode<T>* temp = new QNode<T>(data);
+			if (!rear)
+			{
+				front = rear = temp;
+				return;
+			}
+			rear->SetNext(temp);
+			rear = temp;
+		}
+
+	}
+	void dequeue()
+	
+	{
+		if (front == nullptr)
+			return;
+		QNode<T>* temp = front;
+		front = front->GetNext();
+		if (front == nullptr)
+			rear = nullptr;
+		delete temp;
+	}
+	
 	
 };
