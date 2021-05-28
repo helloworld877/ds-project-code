@@ -30,6 +30,12 @@
     <ClCompile Include="..\missions\mission.cpp">
       <Filter>missions</Filter>
     </ClCompile>
+    <ClCompile Include="..\data structures\Priority_Queue.cpp">
+      <Filter>data structures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\rovers\rover.h">
@@ -40,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="..\missions\mission.h">
       <Filter>missions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\data structures\Priority_Queue.h">
+      <Filter>data structures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
