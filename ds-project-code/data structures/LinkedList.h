@@ -18,7 +18,7 @@ public:
 	}
 	T setItem(T paraItem)
 	{
-		item = paraItem
+		item = paraItem;
 	}
 	T getItem()
 	{
@@ -97,7 +97,7 @@ public:
 
 	~LinkedList() 
 	{
-		clear()
+		clear();
 	}
 
 };
