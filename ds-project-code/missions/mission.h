@@ -18,7 +18,7 @@ private:
 public:
 
 	mission(char type, int formulation_day, int id, int target_location, int mission_duration, int signifigance);
-	
+	mission();
 
 	//setters
 

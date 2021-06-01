@@ -4,7 +4,7 @@ template <typename T>
 class QNode
 {
 private:
-	T item=NULL;
+	T item;
 	QNode<T>* next;
 public:
 	QNode<T>(T item)

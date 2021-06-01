@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="data structures">
       <UniqueIdentifier>{5a7e7ee5-4f61-485f-b470-e86e78d72306}</UniqueIdentifier>
     </Filter>
@@ -21,6 +17,9 @@
     </Filter>
     <Filter Include="rovers">
       <UniqueIdentifier>{68c4adf9-80e1-4118-917e-ccc3b48fbd34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="station">
+      <UniqueIdentifier>{fc3fcf4c-f409-4d60-988f-6a39c25b5e67}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -32,6 +31,9 @@
     </ClCompile>
     <ClCompile Include="..\Source.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\station\station.cpp">
+      <Filter>station</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,5 +52,13 @@
     <ClInclude Include="..\data structures\Queue.h">
       <Filter>data structures</Filter>
     </ClInclude>
+    <ClInclude Include="..\station\station.h">
+      <Filter>station</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt">
+      <Filter>station</Filter>
+    </Text>
   </ItemGroup>
 </Project>

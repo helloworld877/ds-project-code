@@ -8,6 +8,10 @@ rover::rover(int speed, int missions_before_checkup, int checkup_duration)
 	this->available = true;
 	this->checkup_duration = checkup_duration;
 }
+rover::rover()
+{
+
+}
 
 int rover::get_speed()
 {

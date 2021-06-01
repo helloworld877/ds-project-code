@@ -8,7 +8,7 @@ private:
 	int missions_before_checkup;
 public:
 	rover(int speed, int missions_before_checkup, int checkup_duration);
-	
+	rover();
 	
 	
 	int get_speed();

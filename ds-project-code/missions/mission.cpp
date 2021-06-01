@@ -9,7 +9,10 @@ mission::mission(char type, int formulation_day, int id, int target_location, in
 	this->mission_duration = mission_duration;
 	this->signifigance = signifigance;
 }
+mission::mission()
+{
 
+}
 void mission::set_waiting_days(int wait)
 {
 	this->waiting_days = wait;

@@ -65,6 +65,10 @@ class Priority_Queue
 private:
 	PQ_Node<T>* head;
 public:
+	Priority_Queue()
+	{
+
+	}
 	Priority_Queue(PQ_Node<T>* start)
 	{
 
@@ -152,6 +156,9 @@ public:
 
 	}
 	 
-	
+	void set_head(PQ_Node<T>* start)
+	{
+		this->head = start;
+	}
 };
 
