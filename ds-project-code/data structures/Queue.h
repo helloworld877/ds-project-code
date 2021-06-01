@@ -74,5 +74,9 @@ public:
 		delete temp;
 	}
 	
+	T* peek()
+	{
+		return this->front->item;
+	}
 	
 };

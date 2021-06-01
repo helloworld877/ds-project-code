@@ -55,7 +55,7 @@ void station::get_input()
 		cout << "ERROR";
 	}
 
-	cout << no_Provers << " ";
+	/*cout << no_Provers << " ";
 	cout << no_Erovers;
 	cout << endl;
 	cout << V_Provers << " ";
@@ -66,7 +66,7 @@ void station::get_input()
 	cout << checkupDuration1 << " ";
 	cout << endl;
 	cout << no_events << endl;
-	
+	*/
 	for (int i = 0; i < no_events; i++)
 	{
 		inputFile >> formulation;
@@ -111,6 +111,28 @@ void station::get_input()
 	}
 
 	
-
-
+	
 }
+
+
+void station::execute()
+{
+	current_day++;
+	
+
+
+
+	this->resume = true;
+
+	if (this->current_day == 100)
+	{
+		this->resume = false;
+	}
+}
+
+bool station::get_resume()
+{
+	return this->resume;
+}
+
+

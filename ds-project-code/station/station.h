@@ -19,6 +19,7 @@ private:
 	Queue<mission> emergency_missions;
 	Queue<mission> polar_missions;
 
+	bool resume;
 
 
 
@@ -28,6 +29,6 @@ public:
 	void get_input();
 	void print();
 	void execute();
-
+	bool get_resume();
 };
 

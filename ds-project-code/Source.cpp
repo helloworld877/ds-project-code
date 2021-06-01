@@ -8,6 +8,10 @@ int main()
 {
 	station S;
 
+	while (S.get_resume())
+	{
+		S.execute();
+	}
 	
 
 
