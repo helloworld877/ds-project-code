@@ -16,7 +16,7 @@ public:
 		next = NULL;
 		item = paraItem;
 	}
-	T setItem(T paraItem)
+	void setItem(T paraItem)
 	{
 		item = paraItem;
 	}
@@ -24,7 +24,7 @@ public:
 	{
 		return this->item;
 	}
-	T setNext(Node<T>* nextptr)
+	void setNext(Node<T>* nextptr)
 	{
 		next = nextptr;
 	}
@@ -82,17 +82,24 @@ public:
 
 	void insert(T data)
 	{
-		Node<T>* Nptr = new Node(data);
+		Node<T>* Nptr = new Node<T>(data);
 		Nptr->setNext(Head);
 		Head = Nptr;
 	}
 
-	void remove()
+	void remove(T& item)
 	{
-		Node<T>* ptr;
+		Node<T>* ptr=Head;
+		item=ptr->getItem();
 		Head = Head->getNext();
 		delete ptr;
 	}
+
+	Node<T>* get_head()
+	{
+		return this->Head;
+	}
+
 
 
 	~LinkedList() 

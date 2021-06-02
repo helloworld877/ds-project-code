@@ -38,6 +38,15 @@ void mission::set_in_execution(bool exec)
 	this->in_execution = exec;
 }
 
+void mission::set_ending_day()
+{
+	if (this->mission_rover == nullptr)
+	{
+		return;
+	}
+	this->ending_day= this->formulation_day + (2 * target_location / (this->mission_rover->get_speed() * 25)) + mission_duration;
+}
+
 int mission::get_waiting_days()
 {
 	return this->waiting_days;
@@ -63,8 +72,19 @@ rover* mission::get_mission_rover()
 	return this->mission_rover;
 }
 
+int mission::get_formulation_day()
+{
+
+	return this->formulation_day;
+}
+
 void mission::execute()
 {
 	//this function is used to put the respective missions in the in execution list 
 
+}
+
+void mission::increment_waiting()
+{
+	this->waiting_days++;
 }

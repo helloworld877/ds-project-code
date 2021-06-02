@@ -5,8 +5,9 @@
 #include<string>
 using namespace std;
 
-station::station()
+station::station(int p_mode)
 {
+	this->printing_mode = p_mode;
 	this->get_input();
 }
 
@@ -38,12 +39,12 @@ void station::get_input()
 		for (int i = 0; i < polar_rover_count; i++)
 		{
 			rover* temp = new rover(V_Provers,no_precheckMisions1,checkupDuration1);
-			this->polar_rovers.enqueue(*temp);
+			this->polar_rovers.enqueue(temp);
 		}
 		for (int i = 0; i < emergency_rover_count; i++)
 		{
 			rover* temp = new rover(V_Erovers, no_precheckMisions2, checkupDuration1);
-			this->emergency_rovers.enqueue(*temp);
+			this->emergency_rovers.enqueue(temp);
 		}
 
 
@@ -96,12 +97,12 @@ void station::get_input()
 		if (roverType == 'E')
 		{
 			mission* temp = new mission(roverType,eventDay,ID,targetLoc,missionDur,significance);
-			emergency_missions.enqueue(*temp);
+			emergency_missions.enqueue(temp);
 		}
 		if (roverType == 'P')
 		{
 			mission* temp = new mission(roverType, eventDay, ID, targetLoc, missionDur, significance);
-			polar_missions.enqueue(*temp);
+			polar_missions.enqueue(temp);
 		}
 
 
@@ -118,7 +119,116 @@ void station::get_input()
 void station::execute()
 {
 	current_day++;
+	//check if there is a rover returning from maintanance
+
+
+	//check if there is a rover coming back from a mission today
+
+
+	//check if there is a mission to be added today
+	while (emergency_missions.peek() && emergency_missions.peek()->get_formulation_day() == current_day)
+	{
+		mission* temp=nullptr; 
+		emergency_missions.dequeue(temp);
+		EMwaiting_list.enqueue(temp);
+		
+	}
+	while (polar_missions.peek() && polar_missions.peek()->get_formulation_day() == current_day)
+	{
+		mission* temp = nullptr;
+		polar_missions.dequeue(temp);
+		PMwaiting_list.enqueue(temp);
+	}
+
 	
+	// check if there is a rover available for the currently waiting missions
+
+	while (EMwaiting_list.peek() && emergency_rovers.peek())
+	{
+		mission* temp_mission = nullptr;
+		EMwaiting_list.dequeue(temp_mission);
+
+		rover* temp_rover = nullptr;
+		emergency_rovers.dequeue(temp_rover);
+
+		temp_mission->set_mission_rover(temp_rover);
+		temp_mission->set_ending_day();
+
+		temp_rover->increment_missions();
+
+		EMInExecution_list.insert(temp_mission);
+		ERInExecution_list.insert(temp_rover);
+
+
+
+
+	}
+
+
+
+
+	while (PMwaiting_list.peek() && polar_rovers.peek())
+	{
+		mission* temp_mission = nullptr;
+		PMwaiting_list.dequeue(temp_mission);
+
+		rover* temp_rover = nullptr;
+		polar_rovers.dequeue(temp_rover);
+
+		temp_mission->set_mission_rover(temp_rover);
+		temp_mission->set_ending_day();
+
+		temp_rover->increment_missions();
+
+		PMInExecution_list.insert(temp_mission);
+		PRInExecution_list.insert(temp_rover);
+	}
+
+
+	//incrementing waiting days for emergency missions
+
+	if (EMwaiting_list.peek())
+	{
+		Queue<mission*> temp;
+		mission* temp_mission;
+		
+		while (EMwaiting_list.dequeue(temp_mission))
+		{
+			temp_mission->increment_waiting();
+			temp.enqueue(temp_mission);
+			
+		}
+		
+		while (temp.dequeue(temp_mission))
+		{
+			EMwaiting_list.enqueue(temp_mission);
+		}
+
+
+	}
+
+
+	//incrementing waiting days for polar missions
+	
+	if (PMwaiting_list.peek())
+	{
+		Queue<mission*> temp;
+		mission* temp_mission;
+
+		while (PMwaiting_list.dequeue(temp_mission))
+		{
+			temp_mission->increment_waiting();
+			temp.enqueue(temp_mission);
+
+		}
+
+		while (temp.dequeue(temp_mission))
+		{
+			PMwaiting_list.enqueue(temp_mission);
+		}
+
+
+	}
 
 
 

@@ -50,7 +50,7 @@ bool rover::check_checkup()
 	
 }
 
-void rover::execute()
+void rover::increment_missions()
 {
 	this->missions_done++;
 }

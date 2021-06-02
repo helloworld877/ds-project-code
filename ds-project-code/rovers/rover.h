@@ -21,7 +21,7 @@ public:
 	int get_missions_before_checkup();
 
 	bool check_checkup();
-	void execute();
+	void increment_missions();
 
 
 	

@@ -1,6 +1,6 @@
-﻿  mission.cpp
-  Source.cpp
+﻿  Source.cpp
+  mission.cpp
   station.cpp
-C:\Users\Mark\Desktop\work\ds-project-code\ds-project-code\station\station.cpp(16,66): warning C4101: 'checkupDuration2': unreferenced local variable
+C:\Users\Mark\Desktop\work\ds-project-code\ds-project-code\station\station.cpp(17,66): warning C4101: 'checkupDuration2': unreferenced local variable
   Generating Code...
   ds-project-code.vcxproj -> C:\Users\Mark\Desktop\work\ds-project-code\ds-project-code\Debug\ds-project-code.exe

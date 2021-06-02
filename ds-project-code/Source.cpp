@@ -6,7 +6,11 @@ using namespace std;
 #include"../ds-project-code/station/station.h"
 int main()
 {
-	station S;
+	int printing_mode;
+	cout << "enter prefferd output mode" << endl;
+	cin >> printing_mode;
+	station S(printing_mode);
+	
 
 	while (S.get_resume())
 	{

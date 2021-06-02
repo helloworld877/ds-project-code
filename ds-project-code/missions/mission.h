@@ -27,6 +27,7 @@ public:
 	void set_ending_day(int end);
 	void set_mission_rover(rover* mission_rover);
 	void set_in_execution(bool exec);
+	void set_ending_day();
 
 	//getters
 
@@ -35,9 +36,14 @@ public:
 	int get_ending_day();
 	bool get_in_execution();
 	rover* get_mission_rover();
-
+	int get_formulation_day();
+	
 	//executing the mission
 
 	void execute();
+
+	//increment waiting days
+
+	void increment_waiting();
 };
 
