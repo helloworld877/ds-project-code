@@ -7,10 +7,13 @@ private:
 	bool available;
 	int missions_before_checkup;
 	int missions_done=0;
+	char Type;
 public:
 	rover(int speed, int missions_before_checkup, int checkup_duration);
 	rover();
+
 	
+	char get_type();
 	
 	int get_speed();
 	void set_speed(int speed);
