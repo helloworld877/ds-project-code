@@ -13,6 +13,9 @@ private:
 	int signifigance;
 	int ending_day;
 	bool in_execution;
+	int eventDay;
+	int V_Erovers;
+	int V_Provers;
 	rover* mission_rover;
 
 public:
@@ -24,9 +27,12 @@ public:
 
 	void set_waiting_days(int wait);
 	void set_execution_days (int exec);
-	void set_ending_day(int end);
+	void set_ending_day(int& end);
 	void set_mission_rover(rover* mission_rover);
 	void set_in_execution(bool exec);
+	void set_formulation_day(int formulation);
+	void set_eventDay(int eDay);
+	void set_velocity(int v);
 
 	//getters
 
@@ -35,9 +41,12 @@ public:
 	int get_ending_day();
 	bool get_in_execution();
 	rover* get_mission_rover();
+	int get_formulation_day();
+	int get_eventDay();
 
 	//executing the mission
-
+	int Calculate_E_ending_day();
+	int Calculate_P_ending_day();
 	void execute();
 };
 
