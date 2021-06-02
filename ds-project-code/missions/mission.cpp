@@ -23,9 +23,13 @@ void mission::set_execution_days(int exec)
 	this->execution_days = exec;
 }
 
-void mission::set_ending_day(int end)
+void mission::set_ending_day(int& end)
 {
-	this->ending_day = end;
+	if(mission_rover->get_type()=='E')
+	  end = Calculate_E_ending_day();
+	if (mission_rover->get_type() == 'P')
+		end = Calculate_P_ending_day();
+	ending_day = end;
 }
 
 void mission::set_mission_rover(rover* mission_rover)
@@ -36,6 +40,28 @@ void mission::set_mission_rover(rover* mission_rover)
 void mission::set_in_execution(bool exec)
 {
 	this->in_execution = exec;
+}
+
+void mission::set_formulation_day(int formulation)
+{
+	formulation_day = formulation;
+}
+
+void mission::set_eventDay(int eDay)
+{
+	eventDay = eDay;
+}
+
+void mission::set_velocity(int v)
+{
+	if (this->type == 'E')
+	{
+		this->V_Erovers = v;
+	}
+	else
+	{
+		this->V_Provers = v;
+	}
 }
 
 int mission::get_waiting_days()
@@ -61,6 +87,32 @@ bool mission::get_in_execution()
 rover* mission::get_mission_rover()
 {
 	return this->mission_rover;
+}
+
+int mission::get_formulation_day()
+{
+	return formulation_day;
+}
+
+int mission::get_eventDay()
+{
+	return eventDay;
+}
+
+int mission::Calculate_E_ending_day()
+{
+	int end_Day=eventDay+(2*target_location/(V_Erovers*25))+mission_duration;
+
+	
+	return end_Day;
+}
+
+int mission::Calculate_P_ending_day()
+{
+	int end_Day = eventDay + (2 * target_location / (V_Provers * 25 ))+mission_duration;
+
+
+	return end_Day;
 }
 
 void mission::execute()
