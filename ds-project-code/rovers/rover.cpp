@@ -13,6 +13,11 @@ rover::rover()
 
 }
 
+char rover::get_type()
+{
+	return Type;
+}
+
 int rover::get_speed()
 {
 	return this->speed;
