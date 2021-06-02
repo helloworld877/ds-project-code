@@ -7,16 +7,14 @@ using namespace std;
 
 station::station()
 {
-	this->get_input();
+	this->get_input( no_events, formulation_day);
 }
 
-void station::get_input()
+void station::get_input(int& no_events,  int &eventDay)
 {
-	int no_Provers, no_Erovers, V_Provers, V_Erovers;
-	int no_precheckMisions1, no_precheckMisions2, checkupDuration1, checkupDuration2;
-	int no_events = 0;
-	char formulation, roverType;
-	int eventDay, ID, targetLoc, missionDur, significance;
+	
+	no_events = 0;
+	
 
 	ifstream inputFile("input.txt", ios::in);
 
@@ -96,11 +94,14 @@ void station::get_input()
 		if (roverType == 'E')
 		{
 			mission* temp = new mission(roverType,eventDay,ID,targetLoc,missionDur,significance);
+			temp->set_velocity(V_Erovers);
 			emergency_missions.enqueue(*temp);
+
 		}
 		if (roverType == 'P')
 		{
 			mission* temp = new mission(roverType, eventDay, ID, targetLoc, missionDur, significance);
+			temp->set_velocity(V_Provers);
 			polar_missions.enqueue(*temp);
 		}
 
@@ -118,8 +119,78 @@ void station::get_input()
 void station::execute()
 {
 	current_day++;
+	get_input( no_events, formulation_day);
+	mission tempM;
+	rover tempR;
 	
+	mission checkE; //checks if the formulation day of emergency mission = current day
+	checkE = emergency_missions.peek();
+	while (checkE.get_formulation_day() == current_day)
+	{
+		emergency_missions.dequeue(tempM);
+		EMwaiting_list.enqueue(tempM);
+		checkE = emergency_missions.peek();
+	}
+	mission checkP; //checks if the formulation day of polar mission = current day
+	checkP = polar_missions.peek();
+	while (checkP.get_formulation_day() == current_day)
+	{
+		polar_missions.dequeue(tempM);
+		PMwaiting_list.enqueue(tempM);
+		checkP = polar_missions.peek();
+	}
+			
+	while(!emergency_rovers.isEmpty())
+	{
+		emergency_rovers.dequeue(tempR);
+		ERwaiting_list.enqueue(tempR);
+	}
+	while (!polar_rovers.isEmpty())
+	{
+		polar_rovers.dequeue(tempR);
+		PRwaiting_list.enqueue(tempR);
+	}
+		
 
+	while ((!EMwaiting_list.isEmpty()) && !ERwaiting_list.isEmpty())
+	{
+		EMwaiting_list.dequeue(tempM);
+		EMInExecution_list.insert(tempM);
+		eventDay = tempM.get_formulation_day() + tempM.get_waiting_days();
+		ERwaiting_list.dequeue(tempR);
+		ERInExecution_list.insert(tempR);
+	}
+	while ((!PMwaiting_list.isEmpty()) && !PRwaiting_list.isEmpty())
+	{
+		PMwaiting_list.dequeue(tempM);
+		PMInExecution_list.insert(tempM);
+		tempM.set_eventDay( tempM.get_formulation_day() + tempM.get_waiting_days());
+		PRwaiting_list.dequeue(tempR);
+		PRInExecution_list.insert(tempR);
+	}
+	Queue<mission> EDone = ended_E_missions(EMInExecution_list, ERInExecution_list);
+	while (!EDone.isEmpty())
+	{
+		EDone.dequeue(tempM);
+		//TO DO: the pointer pointing at the rover
+		DoneMissions_list.enqueue(tempM);
+	}
+	Queue<mission>PDone = ended_P_missions(PMInExecution_list,PRInExecution_list);
+	while (!PDone.isEmpty())
+	{
+		PDone.dequeue(tempM);
+		//TO DO: the pointer pointing at the rover
+		DoneMissions_list.enqueue(tempM);
+	}
+	/*TO DO:if(checkup)
+        {
+            move to checkup
+        }
+        else 
+        {
+        move to available
+        }
+    */
 
 
 	this->resume = true;
@@ -128,11 +199,105 @@ void station::execute()
 	{
 		this->resume = false;
 	}
+	
+}
+/*void station::set_resume(bool r)
+{
+	resume = r;
 }
 
+*/
 bool station::get_resume()
 {
 	return this->resume;
 }
+
+Queue<mission> station::ended_E_missions(LinkedList<mission>& EMInExecution_list, LinkedList<rover>& ERInExecution)
+{
+	Queue<mission> Done;
+	Queue<mission> tempM;
+	mission temp;
+	rover* R;
+	while (!EMInExecution_list.isEmpty())
+	{
+		EMInExecution_list.dequeue(temp);
+		if (current_day == temp.get_ending_day())
+		{
+			R=temp.get_mission_rover();
+			Done.enqueue(temp);
+			if (R->get_type() == 'E')
+			{
+				//TO DO: Get the rover responsible for the mission and send it to emergency rover list
+			}
+		}
+		else
+		{
+			tempM.enqueue(temp);
+		}
+	}
+	while (!tempM.isEmpty())
+	{
+		tempM.dequeue(temp);
+		EMInExecution_list.insert(temp);
+	}
+	return Done;
+}
+
+Queue<mission> station::ended_P_missions(LinkedList<mission>& PMInExecution_list, LinkedList<rover>& PRInExecution)
+{
+	Queue<mission> Done;
+	Queue<mission> tempM;
+	Node<mission> *temp;
+	temp = PMInExecution_list.get_head();
+	while (!PMInExecution_list.isEmpty())
+	{
+		if (current_day == temp->getItem().get_ending_day())
+		{
+			Done.enqueue(temp->getItem());
+
+		}
+		else
+		{
+			tempM.enqueue(temp);
+		}
+	}
+	while (!tempM.isEmpty())
+	{
+		tempM.dequeue(temp);
+		PMInExecution_list.enqueue(temp);
+	}
+	return Done;
+}
+
+/*Queue<rover> station::ended_E_rover(Queue<mission>& ERInExecution_list)
+{
+	Queue<rover> Done;
+	Queue<rover> tempR;
+	rover temp;
+	while (!ERInExecution_list.isEmpty())
+	{
+		ERInExecution_list.dequeue(temp);
+		if ()
+		{
+			Done.enqueue(temp);
+		}
+		else
+		{
+			tempR.enqueue(temp);
+		}
+	}
+	while (!tempR.isEmpty())
+	{
+		tempR.dequeue(temp);
+		PRInExecution_list.enqueue(temp);
+	}
+	return Done;
+}
+
+Queue<rover> station::ended_P_rover(Queue<mission>& PRInExecution_list)
+{
+	return Queue<rover>();
+}
+*/
 
 
