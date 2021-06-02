@@ -62,21 +62,28 @@ public:
 		}
 
 	}
-	void dequeue()
-	
+	void dequeue(T &item)
 	{
 		if (front == nullptr)
-			return;
+			return ;
 		QNode<T>* temp = front;
 		front = front->GetNext();
 		if (front == nullptr)
 			rear = nullptr;
-		delete temp;
+		item=temp->GetItem();
 	}
 	
-	T* peek()
+	T peek()
 	{
-		return this->front->item;
+		return this->front->GetItem();
 	}
 	
+	bool isEmpty()
+	{
+		if (front == nullptr)
+			return true;
+		else
+			return false;
+
+	}
 };
