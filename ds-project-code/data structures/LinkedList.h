@@ -49,6 +49,10 @@ public:
 		Head = NULL;
 	}
 
+	Node<T>* get_head()
+	{
+		return this->Head;
+	}
 	bool isEmpty()
 	{
 		if(Head == NULL)
@@ -87,13 +91,23 @@ public:
 		Head = Nptr;
 	}
 
-	void remove()
+	void remove(T* data)
 	{
-		Node<T>* ptr;
-		Head = Head->getNext();
-		delete ptr;
+		Node<T>* ptr=Head;
+		Node<T>* ptr2 = Head->getNext();
+		while (ptr2)
+		{
+			if (ptr2->getItem()==*data)
+			{
+				ptr->setNext(ptr2->getNext());
+				
+				return;
+			}
+			ptr = ptr->getNext();
+			ptr2 = ptr2->getNext();
+		}
+		
 	}
-
 
 	~LinkedList() 
 	{
