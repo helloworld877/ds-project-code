@@ -22,6 +22,7 @@ public:
 
 	bool check_checkup();
 	void increment_missions();
+	int get_missions_done();
 
 
 	
