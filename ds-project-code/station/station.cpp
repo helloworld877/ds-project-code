@@ -120,9 +120,46 @@ void station::execute()
 {
 	current_day++;
 	//check if there is a rover returning from maintanance
+	rover* ER_checker;
+	Queue<rover*> tempeven;
+	while (ERIncheckup_list.dequeue(ER_checker))
+	{
+		if (ER_checker->get_days_incheckup() == 7)
+		{
+			emergency_rovers.enqueue(ER_checker);
+		}
+		else
+		{
+			int x=ER_checker->get_days_incheckup() + 1;
+			ER_checker->set_days_incheckup(x);
+			tempeven.enqueue(ER_checker);
+		}
+	}
+	while (tempeven.dequeue(ER_checker))
+	{
+		ERIncheckup_list.enqueue(ER_checker);
+	}
 
 
-
+	rover* PR_checker;
+	Queue<rover*> tempodd;
+	while (PRIncheckup_list.dequeue(PR_checker))
+	{
+		if (PR_checker->get_days_incheckup() == 7)
+		{
+			polar_rovers.enqueue(PR_checker);
+		}
+		else
+		{
+			int x = PR_checker->get_days_incheckup() + 1;
+			PR_checker->set_days_incheckup(x);
+			tempodd.enqueue(PR_checker);
+		}
+	}
+	while (tempodd.dequeue(PR_checker))
+	{
+		PRIncheckup_list.enqueue(PR_checker);
+	}
 
 
 	//check if there is a rover coming back from a mission today
