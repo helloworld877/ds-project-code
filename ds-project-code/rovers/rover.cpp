@@ -55,3 +55,8 @@ void rover::increment_missions()
 	this->missions_done++;
 }
 
+int rover::get_missions_done()
+{
+	return this->missions_done;
+}
+

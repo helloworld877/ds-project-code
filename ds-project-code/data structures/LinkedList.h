@@ -117,6 +117,27 @@ public:
 				
 	}
 
+	void remove_value(T del_item)
+	{
+
+		Node<T>* temp = this->Head;
+		while (temp)
+		{
+			if (temp->getItem() == del_item)
+			{
+				break;
+			}
+			temp = temp->getNext();
+		}
+
+		T item;
+
+		this->remove(temp, item);
+
+
+
+	}
+
 	Node<T>* get_head()
 	{
 		return this->Head;

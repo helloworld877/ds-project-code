@@ -138,6 +138,7 @@ void station::execute()
 			EM_checker = EM_checker->getNext();
 			mission* temp;
 			EMInExecution_list.remove(temp_checker, temp);
+			temp->set_mission_rover(nullptr);
 			E_DoneMissions_list.enqueue(temp);
 
 
@@ -145,6 +146,18 @@ void station::execute()
 
 			rover* temp_rover;
 			temp_rover = temp->get_mission_rover();
+			ERInExecution_list.remove_value(temp_rover);
+
+			if (temp_rover->get_missions_before_checkup() == temp_rover->get_missions_done())
+			{
+				ERIncheckup_list.enqueue(temp_rover);
+
+			}
+			else
+			{
+				emergency_rovers.enqueue(temp_rover);
+			}
+
 
 
 			
@@ -172,13 +185,26 @@ void station::execute()
 			PM_checker = PM_checker->getNext();
 			mission* temp;
 			PMInExecution_list.remove(temp_checker, temp);
+			temp->set_mission_rover(nullptr);
 			P_DoneMissions_list.enqueue(temp);
 			//implement transition of rover////////////////////////////////////////////////////////
 
 
-
 			rover* temp_rover;
 			temp_rover = temp->get_mission_rover();
+			PRInExecution_list.remove_value(temp_rover);
+
+			if (temp_rover->get_missions_before_checkup() == temp_rover->get_missions_done())
+			{
+				PRIncheckup_list.enqueue(temp_rover);
+
+			}
+			else
+			{
+				polar_rovers.enqueue(temp_rover);
+			}
+
+
 
 
 

@@ -35,6 +35,11 @@ private:
 	Queue<mission*> E_DoneMissions_list;
 	Queue<mission*> P_DoneMissions_list;
 
+	//rover checkup list
+	Queue<rover*> ERIncheckup_list;
+	Queue<rover*> PRIncheckup_list;
+
+
 	bool resume=true;
 
 	int printing_mode;
