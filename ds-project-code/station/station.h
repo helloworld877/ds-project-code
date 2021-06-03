@@ -39,7 +39,6 @@ private:
 	Queue<rover*> ERIncheckup_list;
 	Queue<rover*> PRIncheckup_list;
 
-
 	bool resume=true;
 
 	int printing_mode;
