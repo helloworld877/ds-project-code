@@ -32,7 +32,8 @@ private:
 	LinkedList<rover*> PRInExecution_list;
 
 	//done misssions list
-	Queue<mission> DoneMissions_list;
+	Queue<mission*> E_DoneMissions_list;
+	Queue<mission*> P_DoneMissions_list;
 
 	bool resume=true;
 

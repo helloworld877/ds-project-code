@@ -87,12 +87,34 @@ public:
 		Head = Nptr;
 	}
 
-	void remove(T& item)
+	void remove(Node<T>* del_ptr ,T& item)
 	{
-		Node<T>* ptr=Head;
-		item=ptr->getItem();
-		Head = Head->getNext();
-		delete ptr;
+		Node<T>* ptr=this->Head;
+
+		item = del_ptr->getItem();
+
+		if (this->Head == del_ptr)
+		{
+			this->Head = this->Head->getNext();
+			return;
+		}
+
+		if (del_ptr->getNext() == nullptr)
+		{
+			Node<T>* temp = this->Head;
+			while (temp->getNext()->getNext() != NULL)
+			{
+				temp = temp->getNext();
+			}
+			temp->setNext(nullptr);
+			return;
+		}
+
+		this->Head = this->Head->getNext();
+		
+
+		del_ptr->setItem(ptr->getItem());
+				
 	}
 
 	Node<T>* get_head()

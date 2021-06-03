@@ -122,7 +122,80 @@ void station::execute()
 	//check if there is a rover returning from maintanance
 
 
+
+
+
 	//check if there is a rover coming back from a mission today
+
+
+	Node<mission*>*  EM_checker= EMInExecution_list.get_head();
+
+	while (EM_checker)
+	{
+		if (EM_checker->getItem()->get_ending_day() == current_day)
+		{
+			Node<mission*>* temp_checker=EM_checker;
+			EM_checker = EM_checker->getNext();
+			mission* temp;
+			EMInExecution_list.remove(temp_checker, temp);
+			E_DoneMissions_list.enqueue(temp);
+
+
+			//implement transition of rover////////////////////////////////////////////////////////
+
+			rover* temp_rover;
+			temp_rover = temp->get_mission_rover();
+
+
+			
+			continue;
+		}
+		else 
+		{
+			EM_checker = EM_checker->getNext();
+		}
+		
+
+	}
+
+	///////////////////////////////////////////////////////////////////////////////
+
+
+
+	Node<mission*>* PM_checker = PMInExecution_list.get_head();
+
+	while (PM_checker)
+	{
+		if (PM_checker->getItem()->get_ending_day() == current_day)
+		{
+			Node<mission*>* temp_checker = PM_checker;
+			PM_checker = PM_checker->getNext();
+			mission* temp;
+			PMInExecution_list.remove(temp_checker, temp);
+			P_DoneMissions_list.enqueue(temp);
+			//implement transition of rover////////////////////////////////////////////////////////
+
+
+
+			rover* temp_rover;
+			temp_rover = temp->get_mission_rover();
+
+
+
+
+			continue;
+		}
+		else
+		{
+			PM_checker = PM_checker->getNext();
+		}
+
+
+	}
+
+
+
+
 
 
 	//check if there is a mission to be added today
