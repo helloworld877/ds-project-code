@@ -37,6 +37,8 @@ int rover::get_missions_before_checkup()
 	return this->missions_before_checkup;
 }
 
+
+
 bool rover::check_checkup()
 {
 	if (this->missions_done == missions_before_checkup)
@@ -58,5 +60,16 @@ void rover::increment_missions()
 int rover::get_missions_done()
 {
 	return this->missions_done;
+}
+
+void rover::set_days_incheckup(int& checkup)
+{
+	days_incheckup = checkup;
+}
+
+int rover::get_days_incheckup()
+{
+   return days_incheckup;
+	
 }
 
