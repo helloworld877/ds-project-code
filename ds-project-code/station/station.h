@@ -34,6 +34,8 @@ private:
 	//done misssions list
 	Queue<mission*> E_DoneMissions_list;
 	Queue<mission*> P_DoneMissions_list;
+	Queue<mission*> DoneMissions_list;
+
 
 	//rover checkup list
 	Queue<rover*> ERIncheckup_list;

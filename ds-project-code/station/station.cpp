@@ -180,6 +180,7 @@ void station::execute()
 			EMInExecution_list.remove(temp_checker, temp);
 			
 			E_DoneMissions_list.enqueue(temp);
+			DoneMissions_list.enqueue(temp);
 
 
 			//implement transition of rover////////////////////////////////////////////////////////
@@ -228,6 +229,7 @@ void station::execute()
 			PMInExecution_list.remove(temp_checker, temp);
 			
 			P_DoneMissions_list.enqueue(temp);
+			DoneMissions_list.enqueue(temp);
 			//implement transition of rover////////////////////////////////////////////////////////
 
 
@@ -374,11 +376,14 @@ void station::execute()
 
 
 
+
+	//interactive mode here
+
+
+
+
+
 	this->resume = true;
-
-
-
-
 	if (emergency_missions.peek() == nullptr && polar_missions.peek() == nullptr)
 	{
 		if (EMInExecution_list.get_head() == nullptr && PMInExecution_list.get_head() == nullptr)
@@ -386,6 +391,8 @@ void station::execute()
 			if (EMwaiting_list.peek() == nullptr && PMwaiting_list.peek() == nullptr)
 			{
 				this->resume = false;
+				//silent mode here
+
 			}
 		}
 	}
