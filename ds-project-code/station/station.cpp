@@ -138,7 +138,7 @@ void station::execute()
 			EM_checker = EM_checker->getNext();
 			mission* temp;
 			EMInExecution_list.remove(temp_checker, temp);
-			temp->set_mission_rover(nullptr);
+			
 			E_DoneMissions_list.enqueue(temp);
 
 
@@ -158,7 +158,7 @@ void station::execute()
 				emergency_rovers.enqueue(temp_rover);
 			}
 
-
+			temp->set_mission_rover(nullptr);
 
 			
 			continue;
@@ -185,7 +185,7 @@ void station::execute()
 			PM_checker = PM_checker->getNext();
 			mission* temp;
 			PMInExecution_list.remove(temp_checker, temp);
-			temp->set_mission_rover(nullptr);
+			
 			P_DoneMissions_list.enqueue(temp);
 			//implement transition of rover////////////////////////////////////////////////////////
 
@@ -206,7 +206,7 @@ void station::execute()
 
 
 
-
+			temp->set_mission_rover(nullptr);
 
 
 			continue;
