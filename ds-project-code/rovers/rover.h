@@ -7,6 +7,7 @@ private:
 	bool available;
 	int missions_before_checkup;
 	int missions_done=0;
+	int days_in_checkup = 0;
 public:
 	rover(int speed, int missions_before_checkup, int checkup_duration);
 	rover();
@@ -23,6 +24,10 @@ public:
 	bool check_checkup();
 	void increment_missions();
 	int get_missions_done();
+
+
+	void set_days_incheckup(int& checkup);
+	int get_days_incheckup();
 
 
 	

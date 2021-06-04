@@ -111,7 +111,7 @@ void station::get_input()
 
 	}
 
-	
+	this->checkup_duration = checkupDuration1;
 	
 }
 
@@ -122,6 +122,46 @@ void station::execute()
 	//check if there is a rover returning from maintanance
 
 
+	rover* ER_checker;
+	Queue<rover*> tempeven;
+	while (ERIncheckup_list.dequeue(ER_checker))
+	{
+		if (ER_checker->get_days_incheckup() == this->checkup_duration)
+		{
+			emergency_rovers.enqueue(ER_checker);
+		}
+		else
+		{
+			int x = ER_checker->get_days_incheckup() + 1;
+			ER_checker->set_days_incheckup(x);
+			tempeven.enqueue(ER_checker);
+		}
+	}
+	while (tempeven.dequeue(ER_checker))
+	{
+		ERIncheckup_list.enqueue(ER_checker);
+	}
+
+
+	rover* PR_checker;
+	Queue<rover*> tempodd;
+	while (PRIncheckup_list.dequeue(PR_checker))
+	{
+		if (PR_checker->get_days_incheckup() == this->checkup_duration)
+		{
+			polar_rovers.enqueue(PR_checker);
+		}
+		else
+		{
+			int x = PR_checker->get_days_incheckup() + 1;
+			PR_checker->set_days_incheckup(x);
+			tempodd.enqueue(PR_checker);
+		}
+	}
+	while (tempodd.dequeue(PR_checker))
+	{
+		PRIncheckup_list.enqueue(PR_checker);
+	}
 
 
 
@@ -333,10 +373,27 @@ void station::execute()
 
 	this->resume = true;
 
-	if (this->current_day == 100)
+
+
+
+	if (emergency_missions.peek() == nullptr && polar_missions.peek() == nullptr)
 	{
-		this->resume = false;
+		if (EMInExecution_list.get_head() == nullptr && PMInExecution_list.get_head() == nullptr)
+		{
+			if (EMwaiting_list.peek() == nullptr && PMwaiting_list.peek() == nullptr)
+			{
+				this->resume = false;
+			}
+		}
 	}
+
+
+
+
+
+
+
+
 }
 
 bool station::get_resume()

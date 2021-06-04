@@ -60,3 +60,14 @@ int rover::get_missions_done()
 	return this->missions_done;
 }
 
+void rover::set_days_incheckup(int& checkup)
+{
+	days_in_checkup = checkup;
+}
+
+int rover::get_days_incheckup()
+{
+	return days_in_checkup;
+
+}
+

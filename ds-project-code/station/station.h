@@ -44,6 +44,7 @@ private:
 
 	int printing_mode;
 
+	int checkup_duration;
 
 public:
 	station(int p_mode);
