@@ -20,6 +20,7 @@ public:
 	void set_availability(bool available);
 	
 	int get_missions_before_checkup();
+	void set_missions_done(int x);
 
 	bool check_checkup();
 	void increment_missions();

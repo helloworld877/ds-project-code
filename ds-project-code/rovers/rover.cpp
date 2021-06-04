@@ -37,6 +37,11 @@ int rover::get_missions_before_checkup()
 	return this->missions_before_checkup;
 }
 
+void rover::set_missions_done(int x)
+{
+	this->missions_done = x;
+}
+
 bool rover::check_checkup()
 {
 	if (this->missions_done == missions_before_checkup)

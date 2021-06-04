@@ -190,6 +190,7 @@ void station::execute()
 
 			if (temp_rover->get_missions_before_checkup() == temp_rover->get_missions_done())
 			{
+				temp_rover->set_missions_done(0);
 				ERIncheckup_list.enqueue(temp_rover);
 
 			}
@@ -236,6 +237,8 @@ void station::execute()
 
 			if (temp_rover->get_missions_before_checkup() == temp_rover->get_missions_done())
 			{
+
+				temp_rover->set_missions_done(0);
 				PRIncheckup_list.enqueue(temp_rover);
 
 			}
