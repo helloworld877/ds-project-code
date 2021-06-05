@@ -4,19 +4,24 @@ using namespace std;
 #include"data structures/LinkedList.h"
 #include"data structures/Queue.h"
 #include"../ds-project-code/station/station.h"
+#include"../ds-project-code/ds-project-code/UI.h"
 int main()
 {
 	int printing_mode;
-	cout << "enter prefferd output mode" << endl;
-	cin >> printing_mode;
+	UI user;
+	printing_mode = user.Input();
 	station S(printing_mode);
-	
-
 	while (S.get_resume())
 	{
 		S.execute();
 	}
-	
-
-
+	user.Output(S);
+	if (printing_mode == 1)
+		user.interactive_mode(S);
+	else if (printing_mode == 2)
+		user.stepByStep_mode(S);
+	else if (printing_mode == 3)
+		user.silent_mode();
+	else
+		user.wrong_input();
 }
