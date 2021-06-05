@@ -77,6 +77,16 @@ int mission::get_formulation_day()
 
 	return this->formulation_day;
 }
+//extra getters for output file
+int mission::get_ID()
+{
+	return this->id;
+}
+
+int mission::get_ED()
+{
+	return this->get_ending_day() - this->get_formulation_day();
+}
 
 void mission::execute()
 {
