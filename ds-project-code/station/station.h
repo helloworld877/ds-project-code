@@ -13,6 +13,10 @@ private:
 	int emergency_rover_count;
 	int polar_rover_count;
 
+	int emergency_mission_count;
+	int polar_mission_count;
+
+	int waiting_missions;
 	Queue<rover*> emergency_rovers;
 	Queue<rover*> polar_rovers;
 
@@ -54,5 +58,16 @@ public:
 	void print();
 	void execute();
 	bool get_resume();
+	Queue<mission*> get_done_missions();
+	int get_total_rovers();
+	int get_total_Erovers();
+	int get_total_Provers();
+	int get_total_missions();
+	int get_total_Emissions();
+	int get_total_Pmissions();
+	int get_current_day();
+	int get_waiting_missions(int& Ecount, int& Pcount);
+	Queue<mission*> get_Ewaiting_list();
+	Queue<mission*> get_Pwaiting_list();
 };
 
