@@ -37,6 +37,8 @@ public:
 	bool get_in_execution();
 	rover* get_mission_rover();
 	int get_formulation_day();
+	int get_ID();
+	int get_ED();
 	
 	//executing the mission
 
