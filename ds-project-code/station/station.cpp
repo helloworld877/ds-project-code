@@ -46,28 +46,12 @@ void station::get_input()
 			rover* temp = new rover(V_Erovers, no_precheckMisions2, checkupDuration1);
 			this->emergency_rovers.enqueue(temp);
 		}
-
-
-
-		cout << "eshta" << endl;
 	}
 	else
 	{
 		cout << "ERROR";
 	}
 
-	/*cout << no_Provers << " ";
-	cout << no_Erovers;
-	cout << endl;
-	cout << V_Provers << " ";
-	cout << V_Erovers;
-	cout << endl;
-	cout << no_precheckMisions1 << " ";
-	cout << no_precheckMisions2 << " ";
-	cout << checkupDuration1 << " ";
-	cout << endl;
-	cout << no_events << endl;
-	*/
 	for (int i = 0; i < no_events; i++)
 	{
 		inputFile >> formulation;
@@ -77,21 +61,6 @@ void station::get_input()
 		inputFile >> targetLoc;
 		inputFile >> missionDur;
 		inputFile >> significance;
-
-
-
-		/*
-		cout << "day no." << i + 1 << ":";
-		cout << formulation << " ";
-		cout << roverType << " ";
-		cout << eventDay << " ";
-		cout << ID << " ";
-		cout << targetLoc << " ";
-		cout << missionDur << " ";
-		cout << significance << " ";
-		cout << endl;
-
-		*/
 
 
 		if (roverType == 'E')
@@ -188,7 +157,6 @@ void station::execute()
 			rover* temp_rover;
 			temp_rover = temp->get_mission_rover();
 			ERInExecution_list.remove_value(temp_rover);
-
 			if (temp_rover->get_missions_before_checkup() == temp_rover->get_missions_done())
 			{
 				temp_rover->set_missions_done(0);
@@ -405,7 +373,68 @@ void station::execute()
 
 
 }
+//extra getters for output file
+Queue<mission*> station::get_done_missions()
+{
+	return this->DoneMissions_list;
+}
 
+Queue<mission*> station::get_Ewaiting_list()
+{
+	return this->EMwaiting_list;
+}
+
+Queue<mission*> station::get_Pwaiting_list()
+{
+	return this->PMwaiting_list;
+}
+
+int station::get_total_Emissions()
+{
+	return this->emergency_mission_count;
+}
+int station::get_total_Pmissions()
+{
+	return this->polar_mission_count;
+}
+int station::get_total_missions()
+{
+	return this->get_total_Emissions() + this->get_total_Pmissions();
+}
+int station::get_total_Erovers()
+{
+	return this->emergency_rover_count;
+}
+int station::get_total_Provers()
+{
+	return this->polar_rover_count;
+}
+int station::get_total_rovers()
+{
+	return this->get_total_Erovers() + this->get_total_Provers();
+}
+
+int station::get_current_day()
+{
+	return this->current_day;
+}
+int station::get_waiting_missions(int& Ecount, int& Pcount)
+{
+	int count = 0;
+	mission* M;
+	while (!EMwaiting_list.IsEmpty())
+	{
+		EMwaiting_list.dequeue(M);
+		Ecount++;
+	}
+	while (!PMwaiting_list.IsEmpty())
+	{
+		PMwaiting_list.dequeue(M);
+		Pcount++;
+	}
+	count = Ecount + Pcount;
+	return count;
+}
 bool station::get_resume()
 {
 	return this->resume;
