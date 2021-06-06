@@ -98,3 +98,13 @@ void mission::increment_waiting()
 {
 	this->waiting_days++;
 }
+
+void mission::set_priority(int p)
+{
+	this->priority = p;
+}
+
+int mission::get_priority()
+{
+	return this->priority;
+}

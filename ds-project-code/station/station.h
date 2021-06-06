@@ -20,11 +20,12 @@ private:
 	Queue<rover*> emergency_rovers;
 	Queue<rover*> polar_rovers;
 
+	
 	Queue<mission*> emergency_missions;
 	Queue<mission*> polar_missions;
 
 	//missions waiting list
-	Queue<mission*> EMwaiting_list;
+	Priority_Queue<mission*> EMwaiting_list;
 	Queue<mission*> PMwaiting_list;
 	
 	//missions in execution list
@@ -67,7 +68,7 @@ public:
 	int get_total_Pmissions();
 	int get_current_day();
 	int get_waiting_missions(int& Ecount, int& Pcount);
-	Queue<mission*> get_Ewaiting_list();
+	Priority_Queue<mission*> get_Ewaiting_list();
 	Queue<mission*> get_Pwaiting_list();
 
 	Node<mission*>* get_EMInExecution_list();

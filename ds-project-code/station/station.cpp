@@ -66,6 +66,9 @@ void station::get_input()
 		if (roverType == 'E')
 		{
 			mission* temp = new mission(roverType,eventDay,ID,targetLoc,missionDur,significance);
+			int p;
+			p = (significance) / (eventDay * targetLoc * missionDur);
+			temp->set_priority(p);
 			emergency_missions.enqueue(temp);
 			emergency_mission_count++;
 		}
@@ -244,7 +247,7 @@ void station::execute()
 	{
 		mission* temp=nullptr; 
 		emergency_missions.dequeue(temp);
-		EMwaiting_list.enqueue(temp);
+		EMwaiting_list.enqueue(temp, temp->get_priority());
 		
 	}
 	while (polar_missions.peek() && polar_missions.peek()->get_formulation_day() == current_day)
@@ -315,7 +318,7 @@ void station::execute()
 		
 		while (temp.dequeue(temp_mission))
 		{
-			EMwaiting_list.enqueue(temp_mission);
+			EMwaiting_list.enqueue(temp_mission,temp_mission->get_priority());
 		}
 
 
@@ -381,7 +384,7 @@ Queue<mission*> station::get_done_missions()
 	return this->DoneMissions_list;
 }
 
-Queue<mission*> station::get_Ewaiting_list()
+Priority_Queue<mission*> station::get_Ewaiting_list()
 {
 	return this->EMwaiting_list;
 }
@@ -466,9 +469,9 @@ int station::get_waiting_missions(int& Ecount, int& Pcount)
 	Queue<mission*> temp_emergency;
 	int count = 0;
 	mission* M;
-	while (!EMwaiting_list.IsEmpty())
+	while (EMwaiting_list.dequeue(M))
 	{
-		EMwaiting_list.dequeue(M);
+		
 		temp_emergency.enqueue(M);
 		Ecount++;
 	}
@@ -482,7 +485,7 @@ int station::get_waiting_missions(int& Ecount, int& Pcount)
 
 	while (temp_emergency.dequeue(M))
 	{
-		EMwaiting_list.enqueue(M);
+		EMwaiting_list.enqueue(M,M->get_priority());
 	}
 
 

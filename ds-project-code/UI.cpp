@@ -65,7 +65,8 @@ void UI::interactive_mode(station S)
 
 	waiting_missions = 0;
 	
-	Queue<mission*> temp;
+	Priority_Queue<mission*> temp;
+	Queue<mission*> temp2;
 	temp = S.get_Ewaiting_list();
 	while(temp.dequeue(M))
 	{
@@ -74,8 +75,8 @@ void UI::interactive_mode(station S)
 	}
 	cout << "]" << " ";
 	cout << "(";
-	temp = S.get_Pwaiting_list();
-	while (temp.dequeue(M))
+	temp2 = S.get_Pwaiting_list();
+	while (temp2.dequeue(M))
 	{
 		
 		cout << M->get_ID() << ",";
@@ -583,7 +584,8 @@ void UI::stepByStep_mode(station S)
 
 	waiting_missions = 0;
 
-	Queue<mission*> temp;
+	Priority_Queue<mission*> temp;
+	Queue<mission*> temp2;
 	temp = S.get_Ewaiting_list();
 	while (temp.dequeue(M))
 	{
@@ -592,8 +594,8 @@ void UI::stepByStep_mode(station S)
 	}
 	cout << "]" << " ";
 	cout << "(";
-	temp = S.get_Pwaiting_list();
-	while (temp.dequeue(M))
+	temp2 = S.get_Pwaiting_list();
+	while (temp2.dequeue(M))
 	{
 
 		cout << M->get_ID() << ",";

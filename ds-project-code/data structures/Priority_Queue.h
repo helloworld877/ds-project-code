@@ -37,7 +37,7 @@ public:
 
 
 
-	T* get_data()
+	T get_data()
 	{
 		return this->data;
 	}
@@ -77,18 +77,18 @@ public:
 
 	}
 	
-	bool peek(T &item)
+	T peek()
 	{
-		if (head == nullptr)
+		if (this->head== nullptr)
 		{
-			item = NULL;
-			return false;
+			return nullptr;
 		}
-		item = this->head->data;
-		return true;
+
+
+		return this->head->get_data();
 	}
 	
-	bool pop(T& item)
+	bool dequeue(T& item)
 	{
 		if (head == nullptr)
 		{
@@ -105,7 +105,7 @@ public:
 	}
 
 	
-	void push(T& item, int p)
+	void enqueue(T item, int p)
 	{
 		PQ_Node<T>* start = this->head;
 

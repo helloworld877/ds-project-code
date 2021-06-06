@@ -1,3 +1,8 @@
 ﻿  Source.cpp
 C:\Users\Mark\Desktop\work\ds-project-code\ds-project-code\UI.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  station.cpp
+C:\Users\Mark\Desktop\work\ds-project-code\ds-project-code\station\station.cpp(17,66): warning C4101: 'checkupDuration2': unreferenced local variable
+  UI.cpp
+C:\Users\Mark\Desktop\work\ds-project-code\ds-project-code\UI.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
   ds-project-code.vcxproj -> C:\Users\Mark\Desktop\work\ds-project-code\ds-project-code\Debug\ds-project-code.exe

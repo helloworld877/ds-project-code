@@ -12,6 +12,7 @@ private:
 	int mission_duration;
 	int signifigance;
 	int ending_day;
+	int priority=0;
 	bool in_execution;
 	rover* mission_rover;
 
@@ -47,5 +48,10 @@ public:
 	//increment waiting days
 
 	void increment_waiting();
+
+	//set and get priority for emergency missions
+
+	void set_priority(int p);
+	int get_priority();
 };
 
