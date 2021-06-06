@@ -69,5 +69,21 @@ public:
 	int get_waiting_missions(int& Ecount, int& Pcount);
 	Queue<mission*> get_Ewaiting_list();
 	Queue<mission*> get_Pwaiting_list();
+
+	Node<mission*>* get_EMInExecution_list();
+	Node<mission*>* get_PMInExecution_list();
+
+	
+	Queue<rover*> get_emergency_rovers();
+	Queue<rover*> get_polar_rovers();
+
+	Queue<rover*> get_ERIncheckup_list();
+	Queue<rover*> get_PRIncheckup_list();
+
+	Queue<mission*> get_E_DoneMissions_list();
+	Queue<mission*> get_P_DoneMissions_list();
+
+
+
 };
 

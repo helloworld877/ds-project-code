@@ -69,7 +69,7 @@ public:
 		}
 	}
 
-	void clear()
+	/*void clear()
 	{
 		Node<T>* ptr = Head;
 		while (Head)
@@ -79,7 +79,7 @@ public:
 			Head = ptr;
 		}
 	}
-
+	*/
 	void insert(T data)
 	{
 		Node<T>* Nptr = new Node<T>(data);
@@ -102,7 +102,7 @@ public:
 		if (del_ptr->getNext() == nullptr)
 		{
 			Node<T>* temp = this->Head;
-			while (temp->getNext()->getNext() != NULL)
+			while (temp->getNext()->getNext() != nullptr)
 			{
 				temp = temp->getNext();
 			}
@@ -145,11 +145,11 @@ public:
 
 
 
-	~LinkedList() 
+	/*~LinkedList() 
 	{
 		clear();
 	}
-
+	*/
 };
 
 

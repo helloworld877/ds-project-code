@@ -23,6 +23,7 @@
     <ClCompile Include="..\rovers\rover.cpp" />
     <ClCompile Include="..\Source.cpp" />
     <ClCompile Include="..\station\station.cpp" />
+    <ClCompile Include="..\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\data structures\LinkedList.h" />
@@ -31,9 +32,11 @@
     <ClInclude Include="..\missions\mission.h" />
     <ClInclude Include="..\rovers\rover.h" />
     <ClInclude Include="..\station\station.h" />
+    <ClInclude Include="..\UI.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
+    <Text Include="Output.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

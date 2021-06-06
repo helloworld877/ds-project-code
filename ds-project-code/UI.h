@@ -1,8 +1,9 @@
 #pragma once
-#include"../missions/mission.h"
-#include"../rovers/rover.h"
-#include"../station/station.h"
+#include"../ds-project-code/missions/mission.h"
+#include"../ds-project-code/rovers/rover.h"
+#include"../ds-project-code/station/station.h"
 #include <iostream>;
+#include<Windows.h>
 using namespace std;
 #include <fstream>
 class UI

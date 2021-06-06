@@ -1,12 +1,13 @@
 #include "rover.h"
 	
 
-rover::rover(int speed, int missions_before_checkup, int checkup_duration)
+rover::rover(int speed, int missions_before_checkup, int checkup_duration, int id)
 {
 	this->speed = speed;
 	this->missions_before_checkup = missions_before_checkup;
 	this->available = true;
 	this->checkup_duration = checkup_duration;
+	this->id = id;
 }
 rover::rover()
 {
@@ -74,5 +75,10 @@ int rover::get_days_incheckup()
 {
 	return days_in_checkup;
 
+}
+
+int rover::get_id()
+{
+	return this->id;
 }
 

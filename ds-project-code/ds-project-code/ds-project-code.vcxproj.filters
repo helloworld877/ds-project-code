@@ -35,6 +35,9 @@
     <ClCompile Include="..\station\station.cpp">
       <Filter>station</Filter>
     </ClCompile>
+    <ClCompile Include="..\UI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\rovers\rover.h">
@@ -55,9 +58,15 @@
     <ClInclude Include="..\station\station.h">
       <Filter>station</Filter>
     </ClInclude>
+    <ClInclude Include="..\UI.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
+      <Filter>station</Filter>
+    </Text>
+    <Text Include="Output.txt">
       <Filter>station</Filter>
     </Text>
   </ItemGroup>

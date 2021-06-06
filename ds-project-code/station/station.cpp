@@ -38,12 +38,12 @@ void station::get_input()
 
 		for (int i = 0; i < polar_rover_count; i++)
 		{
-			rover* temp = new rover(V_Provers,no_precheckMisions1,checkupDuration1);
+			rover* temp = new rover(V_Provers,no_precheckMisions1,checkupDuration1,i);
 			this->polar_rovers.enqueue(temp);
 		}
 		for (int i = 0; i < emergency_rover_count; i++)
 		{
-			rover* temp = new rover(V_Erovers, no_precheckMisions2, checkupDuration1);
+			rover* temp = new rover(V_Erovers, no_precheckMisions2, checkupDuration1,i);
 			this->emergency_rovers.enqueue(temp);
 		}
 	}
@@ -67,11 +67,13 @@ void station::get_input()
 		{
 			mission* temp = new mission(roverType,eventDay,ID,targetLoc,missionDur,significance);
 			emergency_missions.enqueue(temp);
+			emergency_mission_count++;
 		}
 		if (roverType == 'P')
 		{
 			mission* temp = new mission(roverType, eventDay, ID, targetLoc, missionDur, significance);
 			polar_missions.enqueue(temp);
+			polar_mission_count++;
 		}
 
 
@@ -389,6 +391,46 @@ Queue<mission*> station::get_Pwaiting_list()
 	return this->PMwaiting_list;
 }
 
+Node<mission*>* station::get_EMInExecution_list()
+{
+	return this->EMInExecution_list.get_head();
+}
+
+Node<mission*>* station::get_PMInExecution_list()
+{
+	return this->PMInExecution_list.get_head();
+}
+
+Queue<rover*> station::get_emergency_rovers()
+{
+	return this->emergency_rovers;
+}
+
+Queue<rover*> station::get_polar_rovers()
+{
+	return this->polar_rovers;
+}
+
+Queue<rover*> station::get_ERIncheckup_list()
+{
+	return this->ERIncheckup_list;
+}
+
+Queue<rover*> station::get_PRIncheckup_list()
+{
+	return this->PRIncheckup_list;
+}
+
+Queue<mission*> station::get_E_DoneMissions_list()
+{
+	return this->E_DoneMissions_list;
+}
+
+Queue<mission*> station::get_P_DoneMissions_list()
+{
+	return this->P_DoneMissions_list;
+}
+
 int station::get_total_Emissions()
 {
 	return this->emergency_mission_count;
@@ -420,19 +462,36 @@ int station::get_current_day()
 }
 int station::get_waiting_missions(int& Ecount, int& Pcount)
 {
+	Queue<mission*> temp_polar;
+	Queue<mission*> temp_emergency;
 	int count = 0;
 	mission* M;
 	while (!EMwaiting_list.IsEmpty())
 	{
 		EMwaiting_list.dequeue(M);
+		temp_emergency.enqueue(M);
 		Ecount++;
 	}
 	while (!PMwaiting_list.IsEmpty())
 	{
 		PMwaiting_list.dequeue(M);
+		temp_polar.enqueue(M);
 		Pcount++;
 	}
 	count = Ecount + Pcount;
+
+	while (temp_emergency.dequeue(M))
+	{
+		EMwaiting_list.enqueue(M);
+	}
+
+
+	while (temp_polar.dequeue(M))
+	{
+		PMwaiting_list.enqueue(M);
+	}
+
+
 	return count;
 }
 bool station::get_resume()

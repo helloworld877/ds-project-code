@@ -8,8 +8,9 @@ private:
 	int missions_before_checkup;
 	int missions_done=0;
 	int days_in_checkup = 0;
+	int id;
 public:
-	rover(int speed, int missions_before_checkup, int checkup_duration);
+	rover(int speed, int missions_before_checkup, int checkup_duration,int id);
 	rover();
 	
 	
@@ -29,6 +30,8 @@ public:
 
 	void set_days_incheckup(int& checkup);
 	int get_days_incheckup();
+
+	int get_id();
 
 
 	
