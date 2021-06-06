@@ -90,4 +90,15 @@ public:
 		return this->front->GetItem();
 	}
 	
+	bool IsEmpty()
+	{
+		if (this->front == nullptr)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 };
