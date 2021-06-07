@@ -9,6 +9,7 @@ private:
 	int missions_done=0;
 	int days_in_checkup = 0;
 	int id;
+	char type;
 public:
 	rover(int speed, int missions_before_checkup, int checkup_duration,int id);
 	rover();
@@ -32,6 +33,9 @@ public:
 	int get_days_incheckup();
 
 	int get_id();
+
+	char get_type();
+	void set_type(char t);
 
 
 	

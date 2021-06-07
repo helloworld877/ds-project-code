@@ -39,11 +39,13 @@ void station::get_input()
 		for (int i = 0; i < polar_rover_count; i++)
 		{
 			rover* temp = new rover(V_Provers,no_precheckMisions1,checkupDuration1,i);
+			temp->set_type('P');
 			this->polar_rovers.enqueue(temp);
 		}
 		for (int i = 0; i < emergency_rover_count; i++)
 		{
 			rover* temp = new rover(V_Erovers, no_precheckMisions2, checkupDuration1,i);
+			temp->set_type('E');
 			this->emergency_rovers.enqueue(temp);
 		}
 	}
@@ -161,16 +163,39 @@ void station::execute()
 
 			rover* temp_rover;
 			temp_rover = temp->get_mission_rover();
-			ERInExecution_list.remove_value(temp_rover);
+			if (temp_rover->get_type() == 'E')
+			{
+				ERInExecution_list.remove_value(temp_rover);
+			}
+			else if(temp_rover->get_type()=='P')
+			{
+				PRInExecution_list.remove_value(temp_rover);
+			}
+			
 			if (temp_rover->get_missions_before_checkup() == temp_rover->get_missions_done())
 			{
 				temp_rover->set_missions_done(0);
-				ERIncheckup_list.enqueue(temp_rover);
+
+				if (temp_rover->get_type() == 'E')
+				{
+					ERIncheckup_list.enqueue(temp_rover);
+				}
+				else if (temp_rover->get_type() == 'P')
+				{
+					PRIncheckup_list.enqueue(temp_rover);
+				}
 
 			}
 			else
 			{
-				emergency_rovers.enqueue(temp_rover);
+				if (temp_rover->get_type() == 'E')
+				{
+					emergency_rovers.enqueue(temp_rover);
+				}
+				else if (temp_rover->get_type() == 'P')
+				{
+					polar_rovers.enqueue(temp_rover);
+				}
 			}
 
 			temp->set_mission_rover(nullptr);
@@ -260,13 +285,17 @@ void station::execute()
 	
 	// check if there is a rover available for the currently waiting missions
 
-	while (EMwaiting_list.peek() && emergency_rovers.peek())
+	while (EMwaiting_list.peek() && emergency_rovers.peek() || EMwaiting_list.peek() && polar_rovers.peek())
 	{
 		mission* temp_mission = nullptr;
 		EMwaiting_list.dequeue(temp_mission);
 
 		rover* temp_rover = nullptr;
 		emergency_rovers.dequeue(temp_rover);
+		if (temp_rover == nullptr)
+		{
+			polar_rovers.dequeue(temp_rover);
+		}
 
 		temp_mission->set_mission_rover(temp_rover);
 		temp_mission->set_ending_day();
@@ -274,7 +303,16 @@ void station::execute()
 		temp_rover->increment_missions();
 
 		EMInExecution_list.insert(temp_mission);
-		ERInExecution_list.insert(temp_rover);
+
+		if (temp_rover->get_type() == 'E')
+		{
+			ERInExecution_list.insert(temp_rover);
+		}
+		else if (temp_rover->get_type() == 'P')
+		{
+			PRInExecution_list.insert(temp_rover);
+		}
+		
 
 
 
@@ -350,7 +388,7 @@ void station::execute()
 
 
 
-	//interactive mode here
+	
 
 
 
@@ -364,7 +402,7 @@ void station::execute()
 			if (EMwaiting_list.peek() == nullptr && PMwaiting_list.peek() == nullptr)
 			{
 				this->resume = false;
-				//silent mode here
+				
 
 			}
 		}

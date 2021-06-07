@@ -82,3 +82,13 @@ int rover::get_id()
 	return this->id;
 }
 
+char rover::get_type()
+{
+	return this->type;
+}
+
+void rover::set_type(char t)
+{
+	this->type = t;
+}
+

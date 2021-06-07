@@ -27,6 +27,8 @@ void UI::Output(station S)
 	outputFile << endl;
 	Queue<mission*> temp;
 	temp = S.get_done_missions();
+	sum_ED = 0;
+	sum_wait = 0;
 	while (temp.dequeue(M))
 	{
 		
